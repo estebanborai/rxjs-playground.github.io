@@ -1,14 +1,12 @@
 import React ,{Component} from 'react';
-import Header from './components/header';
-import Navbar from './components/navbar';
-import Sidebar from './components/sidebar';
-import Playground, {Try} from './core';
+import Header from './components/Header';
+import Playground, { Try } from './core';
 import {
   HashRouter as Router,
   Switch,
   Route,
   Link
-} from 'react-router-dom'
+} from 'react-router-dom';
 
 function NotFound(props){
   return [
@@ -21,25 +19,26 @@ export default class App extends Component{
   renderChildren(){
     return [
       <Header key={0} />,
-      <Navbar key={1}/>,
       <div key={2} id="row">
         <div id="main">
-              <Switch>
-                <Route exact path="/" component={Playground}/>
-                <Route exact path="/try" component={Try}/>
-                <Route component={NotFound} />
-              </Switch>
+          <Switch>
+            <Route exact path="/" component={Playground}/>
+            <Route exact path="/try" component={Try}/>
+            <Route component={NotFound} />
+          </Switch>
         </div>
       </div>
-    ]
+    ];
   }
   render(){
-    return [
+    return(
       <Router>
         <div id="app">
           {this.renderChildren()}
         </div>
       </Router>
-    ]
+    );
   }
 }
+
+module.hot.accept();

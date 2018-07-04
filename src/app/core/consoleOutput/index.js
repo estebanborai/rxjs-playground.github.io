@@ -1,4 +1,4 @@
-import React ,{PropTypes, Component} from 'react';
+import React ,{ Component } from 'react';
 import {CONSOLE_EVENT} from '../output';
 import {Observable} from 'rxjs/Observable';
 

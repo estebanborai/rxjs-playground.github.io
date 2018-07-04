@@ -1,5 +1,6 @@
+const webpack = require('webpack');
+
 var path = require('path');
-var webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -8,9 +9,9 @@ module.exports = {
   },
   devtool : '#source-map',
   output: {
-    path: path.join(__dirname,"dist"),
+    path: path.join(__dirname,'dist'),
     filename: '[name].js',
-    publicPath : "http://localhost:8080/assets"
+    publicPath : 'http://localhost:8080/assets'
   },
 
   module: {
@@ -22,23 +23,23 @@ module.exports = {
       test: /\.s?css$/,
       loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
     },{
-          loader: 'json-loader',
-          test: /\.json$/
-        } ]
+      loader: 'json-loader',
+      test: /\.json$/
+    } ]
   },
   node: {
-      fs: 'empty',
-      module: 'empty',
-      net: 'empty',
-      tls: "empty"
+    fs: 'empty',
+    module: 'empty',
+    net: 'empty',
+    tls: 'empty'
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin()
   ],
   externals: {
     codemirror: 'CodeMirror'
   },
   devServer : {
-    contentBase  : path.resolve(__dirname, "src"),
+    contentBase  : path.resolve(__dirname, 'src'),
   }
-
 };

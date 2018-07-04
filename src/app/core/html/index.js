@@ -1,6 +1,7 @@
-import React ,{PropTypes, Component} from 'react';
+import React ,{Component} from 'react';
 import {Observable} from 'rxjs/Observable';
 import Codemirror from 'codemirror';
+import PropTypes from 'prop-types';
 
 export default class HTML extends Component{
   static contextTypes = {

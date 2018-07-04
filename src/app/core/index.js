@@ -1,4 +1,4 @@
-import React ,{PropTypes, Component} from 'react';
+import React ,{Component} from 'react';
 import { transform } from 'babel-standalone';
 import Editor from './editor';
 import ConsoleOutput from './consoleOutput';
@@ -8,6 +8,7 @@ import queryString from 'query-string';
 import Rx from 'rxjs';
 import {Observable} from 'rxjs/Observable';
 import './codemirrorhelper';
+import PropTypes from 'prop-types';
 
 function compile(source) {
 

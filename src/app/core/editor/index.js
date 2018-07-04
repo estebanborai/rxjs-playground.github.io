@@ -1,6 +1,7 @@
-import React, {PropTypes, Component} from 'react';
+import React, {Component} from 'react';
 import Codemirror from 'codemirror';
 import {Observable} from 'rxjs/Observable';
+import PropTypes from 'prop-types';
 
 export default class Editor extends Component{
 

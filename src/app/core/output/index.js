@@ -1,5 +1,6 @@
-import React ,{PropTypes, Component} from 'react';
+import React ,{Component} from 'react';
 export const CONSOLE_EVENT = '@@CONSOLE_EVENT';
+import PropTypes from 'prop-types';
 console.log(CONSOLE_EVENT);
 
 export default class Output extends Component{
