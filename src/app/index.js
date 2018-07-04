@@ -1,5 +1,6 @@
-import React ,{Component} from 'react';
+import React ,{ Component } from 'react';
 import Header from './components/Header';
+import Nav from './components/Nav';
 import Playground, { Try } from './core';
 import {
   HashRouter as Router,
@@ -7,28 +8,25 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-
-function NotFound(props){
-  return [
-    <h1> Not Found</h1>,
-    <p> Go back to <Link to={'/'}>Home</Link></p>
-  ];
-}
+import NotFound404 from './lib/NotFound404';
 
 export default class App extends Component{
   renderChildren(){
-    return [
-      <Header key={0} />,
-      <div key={2} id="row">
-        <div id="main">
-          <Switch>
-            <Route exact path="/" component={Playground}/>
-            <Route exact path="/try" component={Try}/>
-            <Route component={NotFound} />
-          </Switch>
+    return (
+      <main>
+        <Header />
+        <Nav />
+        <div>
+          <div id="main">
+            <Switch>
+              <Route exact path="/" component={Playground}/>
+              <Route exact path="/try" component={Try}/>
+              <Route component={ NotFound404 } />
+            </Switch>
+          </div>
         </div>
-      </div>
-    ];
+      </main>
+    );
   }
   render(){
     return(

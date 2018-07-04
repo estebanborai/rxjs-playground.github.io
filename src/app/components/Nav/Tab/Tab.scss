@@ -1,0 +1,9 @@
+.tab {
+  background: #282a37;
+  color: #ffffff;
+  border-bottom: 2px solid transparent;
+
+  &.active {
+    border-bottom: 2px solid #39ad73;
+  }
+}

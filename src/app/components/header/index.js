@@ -6,7 +6,7 @@ class Header extends React.Component {
     return (
       <header>
         <div className="left-side">
-          <img src="" alt="ReactiveX Logo" />
+          <img src="" alt="-" />
           <h1>ReactiveX JavaScript Playground</h1>
         </div>
         <div className="right-side">
