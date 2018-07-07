@@ -1,38 +1,41 @@
-import React ,{ Component } from 'react';
+import React from 'react';
 import Header from './components/Header';
 import Nav from './components/Nav';
-import Playground, { Try } from './core';
+import Playground from './components/Playground';
 import {
   HashRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from 'react-router-dom';
 import NotFound404 from './lib/NotFound404';
+import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 
-export default class App extends Component{
-  renderChildren(){
-    return (
-      <main>
-        <Header />
-        <Nav />
-        <div>
-          <div id="main">
-            <Switch>
-              <Route exact path="/" component={Playground}/>
-              <Route exact path="/try" component={Try}/>
-              <Route component={ NotFound404 } />
-            </Switch>
-          </div>
-        </div>
-      </main>
-    );
+export default class App extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      initialized: false
+    };
   }
   render(){
     return(
       <Router>
         <div id="app">
-          {this.renderChildren()}
+          <main>
+            <Header />
+            <Nav />
+            <div>
+              <div>
+                <Switch>
+                  <Route exact path="/" component={Playground} />
+                  <Route component={ NotFound404 } />
+                </Switch>
+              </div>
+            </div>
+          </main>
         </div>
       </Router>
     );

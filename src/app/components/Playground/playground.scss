@@ -1,0 +1,53 @@
+.playground{
+  display : flex;
+  height: 100%;
+  .playground-column {
+    width: 50%;
+    word-break: break-all;
+    overflow: hidden;
+    flex : 0 0 50%;
+    display: flex;
+    flex-direction: column;
+  }
+  .playground-outputs{
+    display : flex;
+    flex : 1;
+  }
+  .playground-row{
+    height : 100%;
+    width : 100%;
+  }
+  .console, .output{
+    color : white;
+  }
+  .output{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    > div {
+      flex : 1;
+    }
+    iframe{
+     border : none;
+     color : white;
+     height: 100%;
+     width: 100%;
+   }
+  }
+  .console ul{
+    list-style: none;
+  }
+
+  .html, .editor{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex : 1;
+  > div {
+    overflow: auto;
+  }
+    .CodeMirror{
+      height : auto;
+    }
+  }
+}

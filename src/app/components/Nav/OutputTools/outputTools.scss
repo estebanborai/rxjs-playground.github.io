@@ -1,0 +1,45 @@
+.output-tools {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 1.5rem;
+  box-sizing: border-box;
+
+  button{
+    padding: 8px 12px;
+    background: transparent;
+    outline: none;
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor : pointer;
+    margin-right : 5px;
+  }
+
+  .controls-set {
+    background: #404040;
+  }
+
+  .play-button {
+    color: #1e90ff;
+
+    &:hover {
+      color: #45a3ff;
+    }
+  }
+
+  .clear-button {
+    color: #f4a460;
+
+    &:hover {
+      color: #f3b683;
+    }
+  }
+
+  .stop-button {
+    color: #ff4500;
+    &:hover {
+      color: #f7652f;
+    }
+  }
+}
