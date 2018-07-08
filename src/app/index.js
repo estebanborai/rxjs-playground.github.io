@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './components/Header';
-import Nav from './components/Nav';
-import Playground from './components/Playground';
+import Nav from './containers/Nav';
+import Playground from './containers/Playground';
 import {
   HashRouter as Router,
   Switch,
@@ -14,12 +14,6 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 export default class App extends React.Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      initialized: false
-    };
-  }
   render(){
     return(
       <Router>
@@ -30,7 +24,7 @@ export default class App extends React.Component{
             <div>
               <div>
                 <Switch>
-                  <Route exact path="/" component={Playground} />
+                  <Route exact path="/" component={ Playground } />
                   <Route component={ NotFound404 } />
                 </Switch>
               </div>

@@ -10,6 +10,10 @@ import ConsoleOutput from '../../core/consoleOutput';
 import Output, {CONSOLE_EVENT} from '../../core/output';
 
 class Playground extends React.Component{
+  static propTypes = {
+    editorTab: PropTypes.string.isRequired
+  };
+
   static contextTypes = {
     router : PropTypes.any
   }
@@ -51,6 +55,17 @@ class Playground extends React.Component{
       output : this.state.output,
       html : html,
       setHtml : this.setHtml,
+    }
+  }
+
+  get editorPanel() {
+    const editor = this.props.editorTab;
+    if (editor === 'javascript') {
+      return <Editor />;
+    } else if (editor === 'html') {
+      return <HTMLPane />;
+    } else {
+      return <h1>Undefined Tab "{editor}"</h1>;
     }
   }
 
@@ -119,19 +134,22 @@ class Playground extends React.Component{
 
   render(){
     const {show, tab} = this.state;
+    const { editorTab, outputTab } = this.props;
     if(!show){
       return null;
     }
     return (
-      <div id="playground">
+      <section className="playground">
         <div className="playground-column">
-          <p className="editor-tab"> <button onClick={this.toggleSource} className={this.state.tab === 0 ? "active" : ""}>main.js</button> <button  className={this.state.tab === 1 ? "active" : ""} onClick={this.toggleSource}>index.html</button> </p>
           <div className="playground-row">
-            {tab == 0 ? <Editor/>  : <HTMLPane/>}
+            {this.editorPanel}
           </div>
         </div>
         <div className="playground-column">
-          <p><button id="run-button" onClick={this.run}>Run</button> <button id="clear-button" onClick={this.clearConsole}>Clear</button> <button id="stop-button" onClick={this.stop}>Stop</button></p>
+          <p>
+            <button id="run-button" onClick={this.run}>Run</button> 
+            <button id="clear-button" onClick={this.clearConsole}>Clear</button> 
+            <button id="stop-button" onClick={this.stop}>Stop</button></p>
           <div className="playground-outputs">
             <div className="playground-column">
               <ConsoleOutput ref={n => this.consoleRef = n}/>
@@ -141,7 +159,7 @@ class Playground extends React.Component{
             </div>
           </div>
         </div>
-      </div>
+      </section>
     );
   }
 }
