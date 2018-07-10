@@ -14,8 +14,20 @@ class EditorTools extends React.Component {
     return (
       <div className="editor-section">
         <Tabs>
-          <Tab name="JavaScript" active={editorTab === 'javascript'} onChangeTab={this.props.onChangeTab} />
-          <Tab name="HTML" active={editorTab === 'html'} onChangeTab={this.props.onChangeTab} />
+          <Tab 
+            name="JavaScript" 
+            icon="js"
+            color="#ffff00"
+            active={editorTab === 'javascript'} 
+            onChangeTab={this.props.onChangeTab} 
+          />
+          <Tab 
+            name="HTML" 
+            icon="html5" 
+            color="#ff6600"
+            active={editorTab === 'html'} 
+            onChangeTab={this.props.onChangeTab} 
+          />
         </Tabs>
       </div>
     );

@@ -1,11 +1,12 @@
-import React ,{ Component } from 'react';
-import {CONSOLE_EVENT} from '../output';
-import {Observable} from 'rxjs/Observable';
+import React from 'react';
+import { CONSOLE_EVENT } from '../output';
+import { Observable } from 'rxjs/Observable';
 
-export default class Console extends Component{
+class Console extends React.Component {
   state = {
     consoleOutputs : []
   }
+  
   consoleAppend = message => {
 
     this.setState(function(state,props){
@@ -34,3 +35,5 @@ export default class Console extends Component{
     </div>
   }
 }
+
+export default Console;

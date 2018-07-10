@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import RxJSPlayground from '../../lib/RxJSPlaygroud';
 //Temporal
-import Editor from '../../core/editor';
-import HTMLPane from '../../core/html';
-import ConsoleOutput from '../../core/consoleOutput';
-import Output, {CONSOLE_EVENT} from '../../core/output';
+import Editor from '../Editor/JavaScript';
+import HTMLPane from '../Editor/HTML';
+import ConsoleOutput from '../Console';
+import Output from '../Output';
 
 class Playground extends React.Component{
   static propTypes = {

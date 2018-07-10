@@ -1,9 +1,8 @@
 import React ,{Component} from 'react';
 export const CONSOLE_EVENT = '@@CONSOLE_EVENT';
 import PropTypes from 'prop-types';
-console.log(CONSOLE_EVENT);
 
-export default class Output extends Component{
+class Output extends Component{
 
   static contextTypes = {
     output : PropTypes.string,
@@ -85,3 +84,5 @@ export default class Output extends Component{
     </div>
   }
 }
+
+export default Output;

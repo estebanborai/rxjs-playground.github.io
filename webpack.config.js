@@ -25,6 +25,15 @@ module.exports = {
     },{
       loader: 'json-loader',
       test: /\.json$/
+    },
+    {
+      test: /\.(png|jpg|gif)$/,
+      use: [
+        {
+          loader: 'file-loader',
+          options: {}
+        }
+      ]
     } ]
   },
   node: {
