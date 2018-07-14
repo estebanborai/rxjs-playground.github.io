@@ -1,40 +1,60 @@
 const webpack = require('webpack');
-
-var path = require('path');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: {
-    app: './src/index.js',
-    vendor : ['rxjs']
-  },
-  devtool : '#source-map',
+  entry: './src/index.js',
   output: {
-    path: path.join(__dirname,'dist'),
-    filename: '[name].js',
-    publicPath : 'http://localhost:8080/assets'
+    path: path.resolve(__dirname, 'dist'), // eslint-disable-line
+    filename: 'main.js'
   },
-
   module: {
-    loaders: [{
-      test: /\.jsx?$/,
-      exclude: /node_modules/,
-      loaders: ['babel-loader']
-    },{
-      test: /\.s?css$/,
-      loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
-    },{
-      loader: 'json-loader',
-      test: /\.json$/
-    },
-    {
-      test: /\.(png|jpg|gif)$/,
-      use: [
-        {
-          loader: 'file-loader',
-          options: {}
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
         }
-      ]
-    } ]
+      },
+      {
+        test: /\.(css|scss)$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'sass-loader'
+          }
+        ]
+      },
+      {
+        test: /\.json$/,
+        use: {
+          loader: 'json-loader'
+        }
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader'
+          }
+        ]
+      },
+      {
+        test: /\.(ttf|eot|woff|woff2)$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: 'fonts/[name].[ext]',
+          },
+        }
+      },
+    ]
   },
   node: {
     fs: 'empty',
@@ -43,12 +63,15 @@ module.exports = {
     tls: 'empty'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      template: './src/index.html'
+    })
   ],
   externals: {
     codemirror: 'CodeMirror'
   },
-  devServer : {
-    contentBase  : path.resolve(__dirname, 'src'),
+  resolve: {
+    extensions: ['.js', '.jsx']
   }
 };

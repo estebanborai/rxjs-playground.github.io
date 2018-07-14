@@ -1,0 +1,19 @@
+.tab {
+  background: #404040;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  
+  &.active, &:hover {
+    transition: 0.5s;
+    background: #282a37;
+  }
+}
+
+.tabs {
+  width: 50%;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+}

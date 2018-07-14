@@ -2,13 +2,7 @@
 
 [Checkout Website](https://rxjs-playground.github.io/#/)
 
-![Rxjs playground Screenshot](assets/screenshot.png "Title")
-
-
-### A playground to test Rx
-
-
-
+### A playground to test ReactiveX JS
 
 Explore use cases for Rx and play around with them. 
 
