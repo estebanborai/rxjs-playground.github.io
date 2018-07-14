@@ -5,20 +5,26 @@ import PropTypes from 'prop-types';
 class Tab extends React.Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    color: PropTypes.string,
-    active: PropTypes.bool,
+    activeTab: PropTypes.string.isRequired,
     icon: PropTypes.string,
     onChangeTab: PropTypes.func.isRequired
   };
+
+  get active() {
+    if (this.props.activeTab === this.props.name.toLowerCase()) {
+      return true;
+    }
+    return false;
+  }
 
   changeTab = () => {
     this.props.onChangeTab(this.props.name.toLowerCase());
   }
 
   render() {
-    const { name, active, icon, color } = this.props;
+    const { name, icon } = this.props;
     return (
-      <li className={active ? 'tab active' : 'tab'} onClick={this.changeTab} >
+      <li className={this.active ? 'tab active' : 'tab'} onClick={this.changeTab} >
         {
           icon ? icon : null
         }
