@@ -1,3 +1,10 @@
 .rxjs-editor {
-  background: green;
+  main {
+    display: flex;
+  }
+}
+
+.editor-panel, .output-panel {
+  width: 50%;
+  height: calc(100vh - 20%);
 }

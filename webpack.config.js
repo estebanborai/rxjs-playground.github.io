@@ -8,6 +8,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'), // eslint-disable-line
     filename: 'main.js'
   },
+  devtool : 'source-map',
   module: {
     rules: [
       {
@@ -68,9 +69,6 @@ module.exports = {
       template: './index.html'
     })
   ],
-  externals: {
-    codemirror: 'CodeMirror'
-  },
   resolve: {
     extensions: ['.js', '.jsx']
   }
