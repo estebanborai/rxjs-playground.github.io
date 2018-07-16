@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import queryString from 'query-string';
 import { compile } from '../../lib/RxJSPlayground';
 import ToolBox from './ToolBox';
-import { JSEditor } from './panels';
+import { JSEditor, HTMLEditor } from './panels';
 import Console from '../Console';
 
 class Editor extends React.Component {
@@ -34,11 +34,16 @@ class Editor extends React.Component {
     return js;
   }
 
+  get Html() {
+    const { html } = queryString.parse(this.props.location.search);
+    return html;
+  }
+
   get panel() {
     if (this.activeTab === 'index.js') {
       return <JSEditor onSetSource={::this.setJavaScript} sessionCode={this.javaScript} />;
     } else if (this.activeTab === 'index.html') {
-      return <h1>HTML Editor</h1>;
+      return <HTMLEditor onSetSource={::this.setHtml} sessionCode={this.Html} />;
     } else {
       return null;
     }
@@ -101,7 +106,7 @@ class Editor extends React.Component {
         />
         <main>
           <div className="editor-panel">{this.panel}</div>
-          <div className="output-panel"><Console /></div>
+          <div className="output-panel"><Console source={this.javaScript} /></div>
         </main>
       </section>
     );

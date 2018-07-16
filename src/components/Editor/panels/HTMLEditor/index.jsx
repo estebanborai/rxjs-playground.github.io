@@ -1,21 +1,22 @@
 import React from 'react';
-import './javaScriptEditor.scss';
+import './htmlEditor.scss';
+import {} from '../../../../lib/RxJSPlayground';
 import CodeMirror from 'react-codemirror';
 require('codemirror/lib/codemirror.css');
-require('codemirror/mode/javascript/javascript');
+require('codemirror/mode/htmlmixed/htmlmixed');
 require('codemirror/theme/material.css');
 
-class JavaScriptEditor extends React.Component {
+class HTMLEditor extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      source: this.props.sessionCode || 'console.log("Welcome to RXJS!");'
+      source: this.props.sessionCode || ''
     };
 
     this.options = {
       mode: {
-        name: 'javascript',
+        name: 'htmlmixed',
         json: true,
         globalVars: true
       },
@@ -54,4 +55,4 @@ class JavaScriptEditor extends React.Component {
   }
 }
 
-export default JavaScriptEditor;
+export default HTMLEditor;

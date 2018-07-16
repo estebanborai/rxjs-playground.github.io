@@ -1,6 +1,8 @@
 import React from 'react';
 import './logTile.scss';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 
 class LogTile extends React.Component {
   static propTypes = {
@@ -18,18 +20,27 @@ class LogTile extends React.Component {
 
     if (type === 'error') {
       logStyle.borderColor = '#990011';
-      logStyle.background = '#ff0000';
+      logStyle.background = '#5d1111';
       return logStyle;
     }
 
     return logStyle;
   }
 
+  get icon() {
+    if (this.props.type === 'error') {
+      return <FontAwesomeIcon icon={faTimesCircle} size="lg" color="#ffffff" />
+    } else {
+      return null;
+    }
+  }
+
   render() {
     const { children } = this.props;
     return (
       <li className="log-tile" style={this.style}>
-        {children}
+        {this.icon}
+        <span className="log-text">{children}</span>
       </li>
     );
   }

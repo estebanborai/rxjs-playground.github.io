@@ -3,8 +3,7 @@ import { transform } from 'babel-standalone';
 const CLASS_PREFIX = 'rxjs';
 
 export const EVENTS = {
-  CONSOLE_LOG: `${CLASS_PREFIX}consolelog`,
-  COMPILE_ERROR: `${CLASS_PREFIX}compileerror`
+  CONSOLE_LOG: `${CLASS_PREFIX}consolelog`
 };
 
 export function compile(source) {
@@ -22,14 +21,12 @@ export function compile(source) {
     const transformedCode = transformed.code;
     return transformedCode;
   } catch (err) {
-
-    var event = new CustomEvent(EVENTS.COMPILE_ERROR, { detail : {
+    let event = new CustomEvent(EVENTS.CONSOLE_LOG, { detail : {
       args : [err.message.replace(/(?=\d).*(?=\|)/g, function(a) {
         return Number(a.trim()) - 1;
       })]
     }});
-    parent.window.document.dispatchEvent(event);
+    window.dispatchEvent(event);
     return source;
   }
 }
-

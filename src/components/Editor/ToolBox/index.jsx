@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './toolbox.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faStop, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faPlay, faBars } from '@fortawesome/free-solid-svg-icons';
 import { Tab, Tabs } from '../Tab';
 
 class ToolBox extends React.Component {
