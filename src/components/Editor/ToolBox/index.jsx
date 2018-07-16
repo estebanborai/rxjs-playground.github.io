@@ -7,7 +7,8 @@ import { Tab, Tabs } from '../Tab';
 
 class ToolBox extends React.Component {
   static propTypes = {
-    activeTab: PropTypes.string.isRequired
+    activeTab: PropTypes.string.isRequired,
+    onRun: PropTypes.func.isRequired
   };
 
   get activeTab() {
@@ -22,7 +23,7 @@ class ToolBox extends React.Component {
           <Tab name="index.html" activeTab={this.activeTab} />
         </Tabs>
         <div className="tools">
-          <button className="action-btn">
+          <button className="action-btn" onClick={this.props.onRun} >
             <FontAwesomeIcon icon={faPlay} size="lg" color="#006633" />
           </button>
           <button className="action-btn">

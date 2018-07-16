@@ -2,10 +2,11 @@ import React from 'react';
 import './editor.scss';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
-import { compile } from '../../lib/RxJSPlayground';
+import { compile, EVENTS } from '../../lib/RxJSPlayground';
 import ToolBox from './ToolBox';
 import { JSEditor, HTMLEditor } from './panels';
 import Console from '../Console';
+import Preview from '../Preview';
 
 class Editor extends React.Component {
   static propTypes = {
@@ -49,6 +50,14 @@ class Editor extends React.Component {
     }
   }
 
+  get results() {
+    if (true) {
+      return <Preview ref={p => this.preview = p} />;
+    } else {
+      return <Console />;
+    }
+  }
+
   transition = ({ js, html }) => {
     this.props.history.push(`/?${queryString.stringify({
       html,
@@ -70,9 +79,43 @@ class Editor extends React.Component {
     return;
   };
 
+  update = () => {
+    const frameDoc =  this.preview && this.preview.frameDoc;
+    const frameWindow = this.preview && this.preview.frameWindow;
+
+    frameDoc.body.innerHTML = (`
+      <div id="core">
+        ${this.Html}
+      </div>
+    `);
+    const exp = (
+      `
+      var console = {
+          log: function(){
+              var event = new CustomEvent("${EVENTS.CONSOLE_LOG}", { detail : {
+                args : Array.from(arguments)
+              }});
+              parent.window.document.dispatchEvent(event)
+          }
+      };
+      ${this.javaScript}
+      `);
+     try {
+       frameWindow.eval(exp)
+       console.log(frameWindow.eval(exp));
+     } catch (err) {
+       document.dispatchEvent(new CustomEvent(EVENTS.CONSOLE_LOG ,{
+         detail : {
+           args : [err]
+         }
+       }))
+     }
+  }
+
   run = () => {
     this.setState({ running: true }, () => {
       this.clearConsole();
+      this.update();
     });
   }
 
@@ -94,6 +137,10 @@ class Editor extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.update();
+  }
+
   render() {
     const { state, props } = this;
     return (
@@ -106,7 +153,7 @@ class Editor extends React.Component {
         />
         <main>
           <div className="editor-panel">{this.panel}</div>
-          <div className="output-panel"><Console source={this.javaScript} /></div>
+          <div className="output-panel">{this.results}</div>
         </main>
       </section>
     );

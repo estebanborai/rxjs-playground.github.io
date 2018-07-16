@@ -10,7 +10,14 @@ import {
   Route
 } from 'react-router-dom';
 
+import { EVENTS } from '../../lib/RxJSPlayground';
+import { Observable } from 'rxjs';
+
 class App extends React.Component {
+  componentDidMount() {
+    Observable.fromEvent(document, EVENTS.CONSOLE_LOG).subscribe( x => console.log(x));
+  }
+
   render() {
     return  (
       <Router>
