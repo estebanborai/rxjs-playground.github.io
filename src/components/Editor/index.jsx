@@ -22,7 +22,9 @@ class Editor extends React.Component {
 
     this.state = {
       running: false,
-      output: undefined
+      compiledJS: '',
+      currentOutput: 1,
+      console: ['Hllo']
     };
   }
 
@@ -42,19 +44,30 @@ class Editor extends React.Component {
 
   get panel() {
     if (this.activeTab === 'index.js') {
-      return <JSEditor onSetSource={::this.setJavaScript} sessionCode={this.javaScript} />;
+      return (
+        <JSEditor
+          onSetSource={::this.setJavaScript}
+          sessionCode={this.javaScript}
+          consoleOutput={this.state.console}
+        />
+      );
     } else if (this.activeTab === 'index.html') {
-      return <HTMLEditor onSetSource={::this.setHtml} sessionCode={this.Html} />;
+      return (
+        <HTMLEditor
+          onSetSource={::this.setHtml}
+          sessionCode={this.Html}
+        />
+      );
     } else {
       return null;
     }
   }
 
   get results() {
-    if (true) {
+    if (this.state.currentOutput === 0) {
       return <Preview ref={p => this.preview = p} />;
     } else {
-      return <Console />;
+      return <Console console={this.state.console} />;
     }
   }
 
@@ -76,13 +89,19 @@ class Editor extends React.Component {
   }
 
   clearConsole = () => {
-    return;
+    this.setState({
+      console: []
+    });
   };
+
+  log = message => {
+    const console =  [].concat(this.state.console, message);
+    this.setState({ console });
+  }
 
   update = () => {
     const frameDoc =  this.preview && this.preview.frameDoc;
     const frameWindow = this.preview && this.preview.frameWindow;
-
     frameDoc.body.innerHTML = (`
       <div id="core">
         ${this.Html}
@@ -100,16 +119,15 @@ class Editor extends React.Component {
       };
       ${this.javaScript}
       `);
-     try {
-       frameWindow.eval(exp)
-       console.log(frameWindow.eval(exp));
-     } catch (err) {
-       document.dispatchEvent(new CustomEvent(EVENTS.CONSOLE_LOG ,{
-         detail : {
-           args : [err]
-         }
-       }))
-     }
+    try {
+      frameWindow.eval(exp)
+    } catch (err) {
+      document.dispatchEvent(new CustomEvent(EVENTS.CONSOLE_LOG ,{
+        detail : {
+          args : [err]
+        }
+      }));
+    }
   }
 
   run = () => {
@@ -130,9 +148,9 @@ class Editor extends React.Component {
     const { js: oldJs } = queryString.parse(this.props.location.search);
 
     if (oldJs !== newJs) {
-      const output = compile(newJs);
+      const compiledJS = compile(newJs);
       this.setState({
-        output
+        compiledJS
       });
     }
   }
@@ -142,7 +160,6 @@ class Editor extends React.Component {
   }
 
   render() {
-    const { state, props } = this;
     return (
       <section className="rxjs-editor">
         <ToolBox

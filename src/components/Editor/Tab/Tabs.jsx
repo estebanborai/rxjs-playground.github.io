@@ -4,7 +4,7 @@ import './tab.scss';
 
 class Tabs extends React.Component {
   static propTypes = {
-    children: PropTypes.element.isRequired
+    children: PropTypes.any.isRequired
   };
   render() {
     return (
